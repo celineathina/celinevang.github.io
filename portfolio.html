@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Vang - UX & AI Designer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Import Map for React & Lucide -->
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.263.1"
+      }
+    }
+    </script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Custom Animation Styles -->
+    <style>
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+        .animate-spin-slow {
+          animation: spin 10s linear infinite;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-[#FFFBF7] text-black antialiased selection:bg-rose-400 selection:text-white">
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module">
+        import React, { useState, useEffect } from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { 
+            ArrowUpRight, ArrowRight, ArrowLeft, 
+            Circle, Hexagon, Triangle, 
+            Maximize2, CheckCircle2, 
+            Layout, Image as ImageIcon, MessageSquare, 
+            Database, Brain, Zap, Search, Lightbulb, Users, FlaskConical 
+        } from 'lucide-react';
+
+        const Portfolio = () => {
+            const [selectedProject, setSelectedProject] = useState(null);
+            const [activeProjectHover, setActiveProjectHover] = useState(null);
+            const [scrolled, setScrolled] = useState(0);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const toggleFullScreen = () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch((err) => console.log(err));
+                } else {
+                    if (document.exitFullscreen) document.exitFullscreen();
+                }
+            };
+
+            const projects = [
+                {
+                    id: '01',
+                    title: 'ÜNME',
+                    category: 'Startup / Founder',
+                    role: 'UX Designer & Founder',
+                    desc: 'Turning nutrition into a frictionless daily behavior.',
+                    impact: '40+ User Interviews',
+                    metric: 'Concept Validated',
+                    shape: <Circle className="w-full h-full text-black" strokeWidth={1.5} />,
+                    content: {
+                        headline: "Turning nutrition into a frictionless daily behavior.",
+                        challenge: "Busy people want to eat healthier but don't have time for prep. Confirmed through 40+ surveys and interviews with busy professionals, the core pain point wasn't lack of desire—it was cognitive load and 'rotting fruit guilt'.",
+                        insightTitle: "Evidence-Driven Pivot",
+                        insightText: "Initially aimed at outdoor users as 'Hiker Fuel', research revealed a bigger opportunity: busy 9-5 professionals. We shifted from a niche adventure market to a broader 'healthy weekday habit'.",
+                        solutionTitle: "Designed for Routine",
+                        solutionText: "Unme turns real fruit and veg into a 10-second morning ritual. We tested sachets (too fiddly) vs. scoops (familiar, like protein powder) and landed on a scoop-and-go format that fits into existing shaker-bottle routines.",
+                        outcome: "The pilot launch sold out, validating the concept. The 'Fighter', 'Beets', and 'Brains' blends became part of users' daily morning autopilot."
+                    }
+                },
+                {
+                    id: '02',
+                    title: 'INSIGHTS HUB',
+                    category: 'Maersk / Enterprise AI',
+                    role: 'UX + AI Sprint Lead',
+                    desc: 'Redesigned a survey tool into an intelligent insight engine.',
+                    impact: '11 Clicks → 1 Prompt',
+                    metric: 'AI Integration',
+                    shape: <Hexagon className="w-full h-full text-black" strokeWidth={1.5} />,
+                    content: {
+                        headline: "From 11 clicks to 1 prompt.",
+                        challenge: "The original internal tool forced users through 11 setup steps before they could even draft a question. This high friction led to low adoption, complex setup, and cognitive overload for product teams trying to gather simple feedback.",
+                        insightTitle: "Flow Analysis & Friction",
+                        insightText: "Flow analysis revealed that users didn't want to configure technical settings; they just wanted to ask questions. The cognitive load of the '11-step wizard' was a barrier to entry.",
+                        solutionTitle: "The AI-First Approach",
+                        solutionText: "I designed an AI-assisted flow where users describe their goal in plain language (e.g., 'I want to measure engineer satisfaction'), and the system generates the entire survey structure instantly. We utilized a 'Feasibility Matrix' to prioritize this high-value, easy-to-use flow.",
+                        outcome: "Reduced entry flow from 11 clicks to 1 prompt. Provided strong direction for the product team and validated the 'Create with AI' concept, significantly reducing time-to-value."
+                    }
+                },
+                {
+                    id: '03',
+                    title: 'LIVING PERSONAS',
+                    category: 'R&D / Thesis',
+                    role: 'Research Strategist',
+                    desc: 'An empathy engine that evolves with real user data.',
+                    impact: 'Dynamic vs. Static',
+                    metric: 'Thesis Project',
+                    shape: <Brain className="w-full h-full text-black" strokeWidth={1.5} />,
+                    content: {
+                        headline: "Personas usually die in PDF files.",
+                        challenge: "Research at large enterprises is often scattered across Miro, Dovetail, and SharePoint. Personas become static artifacts that engineering teams ignore. As one engineer put it: 'We're great at collecting metrics, but terrible at understanding the people behind them.'",
+                        insightTitle: "Static vs. Living Data",
+                        insightText: "Engineers don't read static reports. They need answers to specific context/scenarios instantly. The insight was to move from 'archived knowledge' to 'interactive knowledge'.",
+                        solutionTitle: "The Empathy Engine",
+                        solutionText: "I built a framework where personas are 'living' entities. They update automatically as new research tags are added in Dovetail. Teams can 'chat' with the persona via AI to simulate user reactions. Features include traceable sources (linking back to real data) and a transparent confidence score.",
+                        outcome: "Transformed static reports into an interactive empathy engine. Usage data was integrated with interview insights to create a holistic, evolving view of the customer."
+                    }
+                },
+                {
+                    id: '04',
+                    title: 'CREATIVE MOMENTS',
+                    category: 'Game Design',
+                    role: 'Creative Director',
+                    desc: 'Personalized Monopoly games illustrating user lives.',
+                    impact: 'Deep Personalization',
+                    metric: 'Storytelling',
+                    shape: <Layout className="w-full h-full text-black" strokeWidth={1.5} />,
+                    content: {
+                        headline: "Gamifying life stories.",
+                        challenge: "How do you make a gift that feels deeply personal and reflects a person's entire journey? Standard gifts often lack narrative depth.",
+                        insightTitle: "Narrative as Mechanic",
+                        insightText: "People connect most deeply with artifacts that reflect their own struggles and triumphs. The insight was to turn 'memories' into 'game mechanics'.",
+                        solutionTitle: "Bespoke Game Design",
+                        solutionText: "I designed bespoke Monopoly boards where every property, card, and token represented a specific memory or milestone in the user's life. Destiny Cards highlighted both successes and failures.",
+                        outcome: "A project that showcases the power of narrative and deep user understanding in design, proving that personalization goes beyond just adding a name."
+                    }
+                }
+            ];
+
+            const activeProjectData = projects.find(p => p.id === selectedProject);
+
+            // Helper to render specific visuals based on the project
+            const renderProjectVisual = (projectId) => {
+                switch (projectId) {
+                case '01': // ÜNME
+                    return (
+                    <div className="rounded-xl overflow-hidden border-2 border-dashed border-gray-300 relative group bg-gray-50">
+                        <img 
+                        src="https://lh3.googleusercontent.com/pw/AP1GczOZ_vj3lO_-uZef0h0kXZKY0Yu0YMtMkf-yriHxU2cfePh9cem0Uv32kjp_aOIZ2O7nZG-47A9_Cl3wQXuTMBB_uNQ_9Dfy5FZHmkv9jck8bn7wARiQ0wqhVan-I7ySVxaSEMvFHDKVJxTYAkxniLfI=w2744-h1514-s-no-gm?authuser=0" 
+                        alt="User Journey Map" 
+                        className="w-full h-auto block"
+                        />
+                    </div>
+                    );
+                case '02': // INSIGHTS HUB
+                    return (
+                    <div className="bg-[#F0F4FF] rounded-xl p-8 border border-blue-100 min-h-[400px] relative overflow-hidden flex flex-col items-center justify-center">
+                        <div className="flex items-center gap-4 w-full max-w-md opacity-80">
+                            <div className="flex-1 bg-white p-4 rounded-lg shadow-sm border border-red-100 flex flex-col items-center gap-2">
+                            <div className="flex gap-1">
+                                {[...Array(9)].map((_, i) => <div key={i} className="w-1 h-1 bg-red-300 rounded-full" />)}
+                            </div>
+                            <span className="font-mono text-xs font-bold text-red-400">11 STEPS</span>
+                            </div>
+                            <ArrowRight size={24} className="text-gray-300" />
+                            <div className="flex-1 bg-white p-4 rounded-lg shadow-md border-2 border-green-400 flex flex-col items-center gap-2 transform scale-110">
+                            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <Zap size={16} className="text-green-600" />
+                            </div>
+                            <span className="font-mono text-xs font-bold text-green-600">1 PROMPT</span>
+                            </div>
+                        </div>
+                        <div className="mt-8 text-center">
+                        <div className="font-mono text-sm font-bold text-blue-900 uppercase tracking-widest mb-1">FLOW SIMPLIFICATION</div>
+                        <div className="text-blue-600 text-xs">AI-driven intervention reduced cognitive load</div>
+                        </div>
+                        <div className="absolute top-10 left-10 w-20 h-20 border-2 border-dashed border-blue-200 rounded-full opacity-50"></div>
+                    </div>
+                    );
+                case '03': // LIVING PERSONAS
+                    return (
+                    <div className="bg-[#FFF0F5] rounded-xl p-8 border border-rose-100 min-h-[400px] relative overflow-hidden flex flex-col items-center justify-center">
+                        <div className="relative z-10 grid grid-cols-2 gap-8 w-full max-w-md">
+                            <div className="space-y-4">
+                            <div className="bg-white p-3 rounded-lg shadow-sm text-xs flex items-center gap-2"><Database size={12} /> Dovetail Data</div>
+                            <div className="bg-white p-3 rounded-lg shadow-sm text-xs flex items-center gap-2"><Database size={12} /> User Interviews</div>
+                            </div>
+                            <div className="flex items-center">
+                            <div className="bg-black text-white p-6 rounded-2xl shadow-xl w-full flex flex-col items-center text-center">
+                                <MessageSquare size={24} className="mb-2 text-rose-400" />
+                                <span className="font-bold text-sm">AI AGENT</span>
+                                <span className="text-[10px] text-gray-400 mt-1">"Chat with Users"</span>
+                            </div>
+                            </div>
+                        </div>
+                        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                            <div className="w-32 h-px bg-rose-300 transform -translate-x-12"></div>
+                        </div>
+                        <div className="mt-12 text-center relative z-10">
+                        <div className="font-mono text-sm font-bold text-rose-900 uppercase tracking-widest mb-1">DYNAMIC DATA PIPELINE</div>
+                        <div className="text-rose-600 text-xs">Research tags automatically update the Persona</div>
+                        </div>
+                    </div>
+                    );
+                case '04': // CREATIVE MOMENTS
+                    return (
+                        <div className="bg-gray-900 rounded-xl p-8 border border-gray-700 min-h-[400px] flex flex-col items-center justify-center text-white relative overflow-hidden">
+                        <div className="grid grid-cols-3 gap-2 opacity-50 mb-6">
+                            {[...Array(9)].map((_, i) => (
+                                <div key={i} className="w-12 h-12 border border-gray-600 rounded-sm"></div>
+                            ))}
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div className="relative z-10 text-center">
+                            <Layout size={32} className="mx-auto mb-4 text-rose-400" />
+                            <div className="font-mono text-sm font-bold uppercase tracking-widest">[ GAME BOARD ]</div>
+                        </div>
+                        </div>
+                    );
+                default:
+                    return null;
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-[#FFFBF7] text-black font-sans selection:bg-rose-400 selection:text-white overflow-x-hidden relative">
+                
+                {/* --- BACKGROUND GRADIENT MESH --- */}
+                <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+                    <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#FF9A8B] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob"></div>
+                    <div className="absolute top-[20%] right-[-10%] w-[50vw] h-[50vw] bg-[#FF6A88] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-2000"></div>
+                    <div className="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] bg-[#D4A5FF] rounded-full mix-blend-multiply filter blur-[100px] opacity-60 animate-blob animation-delay-4000"></div>
+                    <div className="absolute bottom-[20%] right-[30%] w-[30vw] h-[30vw] bg-[#9EEFE1] rounded-full mix-blend-multiply filter blur-[60px] opacity-60 animate-blob animation-delay-1000"></div>
+                </div>
+
+                {/* --- NOISE TEXTURE OVERLAY --- */}
+                <div className="fixed inset-0 z-40 opacity-[0.15] pointer-events-none mix-blend-overlay" 
+                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+                </div>
+
+                {/* Navigation */}
+                <nav className="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-50">
+                    <div 
+                    className="font-bold text-xl tracking-tighter flex items-center gap-2 cursor-pointer hover:opacity-70 transition-opacity"
+                    onClick={() => setSelectedProject(null)}
+                    >
+                    <div className="w-3 h-3 bg-black rounded-full"></div>
+                    CV—PORTFOLIO
+                    </div>
+                    <div className="flex gap-1 bg-black/5 backdrop-blur-sm p-1 rounded-full border border-black/5">
+                    <a href="#work" onClick={() => setSelectedProject(null)} className="px-4 py-2 rounded-full text-xs font-bold uppercase hover:bg-white hover:shadow-sm transition-all">Work</a>
+                    <a href="#about" onClick={() => setSelectedProject(null)} className="px-4 py-2 rounded-full text-xs font-bold uppercase hover:bg-white hover:shadow-sm transition-all">About</a>
+                    <a href="#contact" className="px-4 py-2 rounded-full text-xs font-bold uppercase hover:bg-black hover:text-white hover:shadow-sm transition-all">Contact</a>
+                    </div>
+                </nav>
+
+                {/* --- MAIN CONTENT SWITCHER --- */}
+                {!selectedProject ? (
+                    /* ================= HOME VIEW ================= */
+                    <main className="relative z-10">
+                    
+                    {/* Hero Section */}
+                    <header className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 pt-20">
+                        <div className="max-w-[90rem] mx-auto w-full">
+                        <div className="flex flex-col items-start relative">
+                            <h1 className="text-[10vw] md:text-[11vw] leading-[0.85] font-black tracking-tighter mb-8 text-black mix-blend-hard-light relative">
+                            <span className="flex items-center gap-4 md:gap-8">
+                                <ArrowRight className="w-[8vw] h-[8vw] stroke-[3px]" />
+                                SIMPLIFYING
+                            </span>
+                            <span className="block pl-[8vw] text-transparent bg-clip-text bg-gradient-to-r from-black via-black to-gray-600">
+                                COMPLEXITY
+                            </span>
+                            <span className="block pl-[2vw]">
+                                WITH AI & UX.
+                            </span>
+                            </h1>
+                        </div>
+                        
+                        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mt-12 border-t-2 border-black pt-8">
+                            <div className="max-w-2xl">
+                                <p className="text-2xl md:text-3xl font-medium leading-tight mb-6">
+                                Hi, I'm <span className="font-bold">Celine Vang</span>. 
+                                I build research-led, AI-supported products that make digital systems feel intuitive and human.
+                                </p>
+                            </div>
+                            <div className="mt-8 md:mt-0 font-mono text-sm tracking-widest uppercase">
+                                ( Copenhagen, DK )
+                            </div>
+                        </div>
+                        </div>
+                    </header>
+
+                    {/* Projects List */}
+                    <section id="work" className="py-32 px-6 sm:px-12">
+                        <div className="flex items-center gap-4 mb-16">
+                        <div className="h-px bg-black flex-grow"></div>
+                        <h2 className="text-sm font-bold bg-black text-white px-3 py-1 uppercase rounded-sm">Selected Works</h2>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 gap-4">
+                        {projects.map((project, index) => (
+                            <div 
+                            key={project.id}
+                            className="group relative bg-white/40 backdrop-blur-md border border-white/60 rounded-3xl p-8 md:p-12 transition-all duration-500 hover:bg-white/80 hover:scale-[1.01] hover:shadow-xl hover:shadow-rose-500/10 cursor-pointer overflow-hidden"
+                            onClick={() => {
+                                window.scrollTo(0,0);
+                                setSelectedProject(project.id);
+                            }}
+                            onMouseEnter={() => setActiveProjectHover(project.id)}
+                            onMouseLeave={() => setActiveProjectHover(null)}
+                            >
+                            <div className="flex flex-col md:flex-row justify-between relative z-20">
+                                <div className="flex-1">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <span className="flex items-center justify-center w-10 h-10 rounded-full border border-black font-mono text-sm group-hover:bg-black group-hover:text-white transition-colors">0{index + 1}</span>
+                                    <span className="font-mono text-xs uppercase tracking-widest bg-rose-100 px-2 py-1 rounded-md mix-blend-multiply">{project.category}</span>
+                                </div>
+                                
+                                <h3 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4 group-hover:text-rose-600 transition-colors">
+                                    {project.title}
+                                </h3>
+                                <p className="text-xl text-gray-800 max-w-lg font-medium leading-relaxed">
+                                    {project.desc}
+                                </p>
+                                </div>
+
+                                <div className="mt-8 md:mt-0 md:text-right flex flex-col md:items-end justify-between">
+                                <div className="hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
+                                    <ArrowUpRight size={48} className="text-black" />
+                                </div>
+                                <div className="flex flex-col gap-1 font-mono text-xs">
+                                    <span className="text-gray-500 uppercase">Impact</span>
+                                    <span className="bg-black text-white px-2 py-1 rounded-sm">{project.impact}</span>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div className="absolute -bottom-10 -right-10 w-64 h-64 opacity-0 group-hover:opacity-10 transition-all duration-700 transform rotate-12 scale-50 group-hover:scale-100">
+                                {project.shape}
+                            </div>
+                            </div>
+                        ))}
+                        </div>
+                    </section>
+
+                    {/* About & Footer */}
+                    <section id="about" className="py-32 px-6 sm:px-12">
+                        <div className="max-w-6xl mx-auto bg-black text-[#FFFBF7] rounded-[3rem] p-12 md:p-24 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-rose-600 rounded-full mix-blend-screen filter blur-[100px] opacity-40"></div>
+                        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-600 rounded-full mix-blend-screen filter blur-[100px] opacity-40"></div>
+                        
+                        <div className="relative z-10 flex flex-col md:flex-row gap-16">
+                            <div className="flex-1">
+                            <h2 className="text-3xl md:text-5xl font-bold tracking-tighter leading-tight mb-8">
+                                I BUILD SYSTEMS. WHETHER IT'S FOUNDING <span className="text-rose-400">ÜNME</span> OR RESTRUCTURING ENTERPRISE DATA AT <span className="text-teal-400">MAERSK</span>, MY WORK BRIDGES THE GAP BETWEEN COLD DATA AND HUMAN BEHAVIOR.
+                            </h2>
+                            </div>
+                            
+                            <div className="w-full md:w-1/3 flex flex-col justify-between">
+                            <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20">
+                                <h4 className="font-mono text-xs uppercase tracking-widest text-rose-300 mb-6">Capabilities</h4>
+                                <ul className="space-y-3 font-bold text-lg">
+                                <li className="flex items-center gap-2"><div className="w-2 h-2 bg-rose-500 rounded-full"></div>Figma & Figma Make</li>
+                                <li className="flex items-center gap-2"><div className="w-2 h-2 bg-orange-500 rounded-full"></div>AI Prototyping</li>
+                                <li className="flex items-center gap-2"><div className="w-2 h-2 bg-purple-500 rounded-full"></div>User Strategy</li>
+                                <li className="flex items-center gap-2"><div className="w-2 h-2 bg-teal-500 rounded-full"></div>React Basics</li>
+                                </ul>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+
+                    <footer id="contact" className="py-20 px-6 sm:px-12 text-center">
+                        <h2 className="text-[10vw] font-black tracking-tighter leading-none mb-8 hover:tracking-normal transition-all duration-700 cursor-default text-black">
+                        LET'S TALK
+                        </h2>
+                        <div className="flex justify-center gap-4 md:gap-8 flex-wrap mb-16">
+                        <a href="mailto:Celinevang.athina@gmail.com" className="bg-white border-2 border-black text-black px-8 py-4 rounded-full font-bold hover:bg-black hover:text-white transition-all transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none">
+                            EMAIL ME
+                        </a>
+                        <a href="#" className="bg-[#0077b5] border-2 border-black text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-all transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none">
+                            LINKEDIN
+                        </a>
+                        </div>
+                        <div className="flex flex-col md:flex-row justify-between items-center text-sm font-bold border-t-2 border-black pt-8">
+                        <div>© 2025 CELINE VANG</div>
+                        <div className="flex gap-2 items-center mt-4 md:mt-0">
+                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                            AVAILABLE FOR HIRE
+                        </div>
+                        </div>
+                    </footer>
+                    </main>
+                ) : (
+                    /* ================= PROJECT DETAIL VIEW ================= */
+                    <div className="relative z-20 min-h-screen pt-24 px-6 sm:px-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                    
+                    {/* Back Button */}
+                    <button 
+                        onClick={() => setSelectedProject(null)}
+                        className="group flex items-center gap-3 font-mono text-sm uppercase tracking-widest mb-12 hover:text-rose-500 transition-colors"
+                    >
+                        <div className="p-2 border border-black rounded-full group-hover:bg-black group-hover:text-white transition-all">
+                        <ArrowLeft size={16} />
+                        </div>
+                        Back to Index
+                    </button>
+
+                    {/* Project Hero */}
+                    <div className="max-w-[80rem] mx-auto">
+                        <div className="flex flex-col lg:flex-row gap-12 lg:items-end mb-20 border-b-2 border-black pb-12">
+                        <div className="flex-1">
+                            <div className="flex items-center gap-4 mb-6">
+                            <span className="font-mono text-xs uppercase tracking-widest bg-rose-100 px-3 py-1 rounded-md mix-blend-multiply border border-black/10">
+                                {activeProjectData.category}
+                            </span>
+                            <span className="font-mono text-xs uppercase tracking-widest bg-teal-100 px-3 py-1 rounded-md mix-blend-multiply border border-black/10">
+                                {activeProjectData.role}
+                            </span>
+                            </div>
+                            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
+                            {activeProjectData.title}
+                            </h1>
+                            <p className="text-2xl md:text-3xl font-medium leading-tight max-w-3xl text-gray-800">
+                            {activeProjectData.content.headline}
+                            </p>
+                        </div>
+                        <div className="lg:text-right">
+                            <div className="bg-black text-white p-6 rounded-2xl inline-block text-left min-w-[250px] shadow-[8px_8px_0px_0px_rgba(244,63,94,0.3)]">
+                                <div className="font-mono text-xs text-gray-400 uppercase mb-2">Key Metric</div>
+                                <div className="text-3xl font-bold mb-4">{activeProjectData.impact}</div>
+                                <div className="font-mono text-xs text-gray-400 uppercase mb-2">Status</div>
+                                <div className="flex items-center gap-2">
+                                <CheckCircle2 size={16} className="text-green-400" />
+                                <span className="font-bold">{activeProjectData.metric}</span>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        {/* Project Content Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-32">
+                        
+                        {/* Left Column (Sticky Headers) */}
+                        <div className="md:col-span-4 space-y-12">
+                            <div className="bg-white/40 backdrop-blur-md border border-white/60 p-8 rounded-3xl sticky top-32">
+                            <h3 className="font-black text-2xl mb-4 flex items-center gap-2">
+                                <Triangle size={20} className="fill-black" /> THE CHALLENGE
+                            </h3>
+                            <p className="text-lg leading-relaxed text-gray-700">
+                                {activeProjectData.content.challenge}
+                            </p>
+                            </div>
+                        </div>
+
+                        {/* Right Column (Narrative) */}
+                        <div className="md:col-span-8 space-y-20">
+                            
+                            {/* 1. Pivot / Context / Insight */}
+                            <div>
+                            <span className="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">01 — {activeProjectData.content.insightTitle}</span>
+                            <h2 className="text-4xl font-bold tracking-tighter mb-6">{activeProjectData.content.insightTitle}</h2>
+                            <p className="text-xl leading-relaxed text-gray-800 mb-8 border-l-4 border-rose-400 pl-6">
+                                {activeProjectData.content.insightText}
+                            </p>
+                            
+                            {/* DYNAMIC ASSET RENDERER */}
+                            {renderProjectVisual(activeProjectData.id)}
+                            </div>
+
+                            {/* 2. Solution */}
+                            <div>
+                            <span className="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">02 — The Solution</span>
+                            <h2 className="text-4xl font-bold tracking-tighter mb-6">{activeProjectData.content.solutionTitle}</h2>
+                            <p className="text-xl leading-relaxed text-gray-800 mb-8">
+                                {activeProjectData.content.solutionText}
+                            </p>
+                            
+                            {/* Added Placement for ÜNME - TWO PLACEHOLDERS */}
+                            {activeProjectData.id === '01' && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    {/* Image 1 */}
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-square flex flex-col items-center justify-center text-gray-400">
+                                        <img 
+                                        src="https://lh3.googleusercontent.com/pw/AP1GczMEwOWCSDSoUFrhg2Ns4hvRXgGXrtFTN5zu5xop2ALi50guqUhZpt9UJ7jrVVpgT9U_krdvqSKwHTEqheQf3DUdrFZ0XMEzO12FHaVvFfy_ivVq-yFgat8khGQf1PeCdbVZzZsLcy5ZieDxGvJWI32m=w1136-h1514-s-no-gm?authuser=0" 
+                                        alt="Image 01" 
+                                        className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    {/* Image 2 */}
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-square flex flex-col items-center justify-center text-gray-400">
+                                        <img 
+                                        src="https://lh3.googleusercontent.com/pw/AP1GczOhixzbwGVeM_a-NDS42EYB_VVF8-Zg6wqnBHlJc0ZPcsSoT2rhC0gZB2xEYlnwTxT6bDAhL7v9eAQ8W2gYNFdRAX1-WZlq5feZFNFa7dhyGc4rOVaUGUeOzDlXqgttvMR_FT8X40eXUWbxT3sUIw6w=w1136-h1514-s-no-gm?authuser=0" 
+                                        alt="Image 02" 
+                                        className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* ADDED: INSIGHTS HUB (02) Placeholders - Solution */}
+                            {activeProjectData.id === '02' && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    {/* Placeholder A */}
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[4/3] flex flex-col items-center justify-center text-gray-400">
+                                        <ImageIcon size={32} className="mb-2 opacity-50" />
+                                        <span className="font-mono text-xs uppercase tracking-widest">AI Flow Diagram</span>
+                                    </div>
+                                    {/* Placeholder B */}
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[4/3] flex flex-col items-center justify-center text-gray-400">
+                                        <ImageIcon size={32} className="mb-2 opacity-50" />
+                                        <span className="font-mono text-xs uppercase tracking-widest">Prompt Interface</span>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* ADDED: LIVING PERSONAS (03) Placeholders - Solution */}
+                            {activeProjectData.id === '03' && (
+                                <div className="grid grid-cols-1 gap-6 mb-8">
+                                    {/* Landscape Image */}
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-video flex flex-col items-center justify-center text-gray-400">
+                                        <ImageIcon size={32} className="mb-2 opacity-50" />
+                                        <span className="font-mono text-xs uppercase tracking-widest">System Architecture</span>
+                                    </div>
+                                    {/* Two Bottom Images */}
+                                    <div className="grid grid-cols-2 gap-6">
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[4/3] flex flex-col items-center justify-center text-gray-400">
+                                        <ImageIcon size={32} className="mb-2 opacity-50" />
+                                        <span className="font-mono text-xs uppercase tracking-widest">Persona Card</span>
+                                    </div>
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[4/3] flex flex-col items-center justify-center text-gray-400">
+                                        <ImageIcon size={32} className="mb-2 opacity-50" />
+                                        <span className="font-mono text-xs uppercase tracking-widest">Chat Interface</span>
+                                    </div>
+                                    </div>
+                                </div>
+                            )}
+                            </div>
+
+                            {/* NEW FEASIBILITY SECTION (For Insights Hub) */}
+                            {activeProjectData.id === '02' && (
+                                <div className="mb-20">
+                                <span className="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">03 — Feasibility</span>
+                                <h2 className="text-4xl font-bold tracking-tighter mb-6">Feasibility</h2>
+                                <p className="text-xl leading-relaxed text-gray-800 mb-8">
+                                    We were limited by the amount of impact we could create with the design. So we created a feasibility matrix that stated "need to have/want to have" and "hard to implement/easy to implement" to determine what to create with the engineers.
+                                </p>
+                                <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-video flex flex-col items-center justify-center text-gray-400">
+                                    <ImageIcon size={32} className="mb-2 opacity-50" />
+                                    <span className="font-mono text-xs uppercase tracking-widest">Feasibility Matrix</span>
+                                </div>
+                                </div>
+                            )}
+
+                            {/* 3/4. Outcome/CTA Block */}
+                            {activeProjectData.id === '03' ? (
+                                // LIVING PERSONAS CTA
+                                <div className="bg-black text-[#FFFBF7] p-8 md:p-12 rounded-[2rem] relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-rose-600 rounded-full mix-blend-screen filter blur-[80px] opacity-30"></div>
+                                <div className="relative z-10">
+                                    <span className="font-mono text-xs uppercase tracking-widest text-gray-400 mb-4 block">
+                                        03 — Master Thesis Research
+                                    </span>
+                                    <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6">Let’s Validate Living Personas With Real Data.</h2>
+                                    <p className="text-xl leading-relaxed text-gray-300 mb-8">
+                                        This project is part of my Master Thesis. I am looking for a forward-thinking company to partner with, granting access to scattered user research data. My goal is to test this framework in a real-world setting and discover better ways to synthesize fragmented insights into actionable intelligence.
+                                        <br/><br/>
+                                        If your team struggles with scattered research, outdated personas, or slow insight transfer. Let's talk.
+                                    </p>
+                                    <a href="mailto:Celinevang.athina@gmail.com" className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-bold text-sm hover:bg-rose-400 hover:text-white transition-colors">
+                                        PARTNER WITH ME <ArrowRight size={16} />
+                                    </a>
+                                </div>
+                                </div>
+                            ) : (
+                                // STANDARD OUTCOME
+                                <div className="bg-black text-[#FFFBF7] p-8 md:p-12 rounded-[2rem] relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-rose-600 rounded-full mix-blend-screen filter blur-[80px] opacity-30"></div>
+                                    <div className="relative z-10">
+                                    <span className="font-mono text-xs uppercase tracking-widest text-gray-400 mb-4 block">
+                                        {activeProjectData.id === '02' ? '04' : '03'} — The Result
+                                    </span>
+                                    <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6">Impact Delivered.</h2>
+                                    <p className="text-xl leading-relaxed text-gray-300">
+                                        {activeProjectData.content.outcome}
+                                    </p>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* 4. Additional Visuals (UNME - New Request from earlier) */}
+                            {activeProjectData.id === '01' && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                                    {/* New Image 1 */}
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[3/4] flex flex-col items-center justify-center text-gray-400">
+                                        <img 
+                                        src="https://lh3.googleusercontent.com/pw/AP1GczPYf8ifCnuxh0BQH7x0oC7koZY-GGK49hGbjHM0Ez_fnFImvOteISqjaKnvTwapAeda8uWePetMSqfls4GBsbmWNWv3CDS_vKXjTVXUXfb_ZoXH3Zkxo1g93YVnpAodGUPPlvJGf2MyRqFmJW4XU9oi=w994-h1514-s-no-gm?authuser=0" 
+                                        alt="New Image 01" 
+                                        className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    {/* New Image 2 */}
+                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[3/4] flex flex-col items-center justify-center text-gray-400">
+                                        <img 
+                                        src="https://lh3.googleusercontent.com/pw/AP1GczPDIKSXqIJcTP0UzV6tOAFlZODTphQmFwYyvhDBBveWHadBxMAgNKxku_oaAF1KEWGQK-JDizH4bM6eLZpnNffpmymkmv8vBCOcTfezfOMVIvY-Krot-nQbnhz_jJZJikOkGF3lx0TpzJfMfWLhJ7N6=w1136-h1514-s-no-gm?authuser=0" 
+                                        alt="New Image 02" 
+                                        className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                        </div>
+                        </div>
+                        
+                        {/* Next Project Teaser */}
+                        <div className="border-t-2 border-black pt-12 pb-20 flex justify-end">
+                        <button 
+                            onClick={() => {
+                            const currentIndex = projects.findIndex(p => p.id === selectedProject);
+                            const nextIndex = (currentIndex + 1) % projects.length;
+                            window.scrollTo(0,0);
+                            setSelectedProject(projects[nextIndex].id);
+                            }}
+                            className="text-right group"
+                        >
+                            <div className="font-mono text-xs uppercase tracking-widest text-gray-500 mb-2">Next Project</div>
+                            <div className="text-4xl font-black group-hover:text-rose-500 transition-colors flex items-center gap-4 justify-end">
+                            {projects[(projects.findIndex(p => p.id === selectedProject) + 1) % projects.length].title}
+                            <ArrowRight size={32} />
+                            </div>
+                        </button>
+                        </div>
+
+                    </div>
+                    </div>
+                )}
+
+                {/* NEW: Full Screen Toggle Button (Fixed Position) */}
+                <button 
+                    onClick={toggleFullScreen}
+                    className="fixed bottom-6 right-6 z-50 bg-black text-white p-3 rounded-full shadow-xl hover:scale-110 transition-transform flex items-center justify-center border-2 border-white/20"
+                    title="Toggle Full Screen"
+                >
+                    <Maximize2 size={24} />
+                </button>
+            </div>
+            );
+        };
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<Portfolio />);
+    </script>
+</body>
+</html>
