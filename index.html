@@ -619,26 +619,27 @@
 
                             {/* 4. Additional Visuals (UNME - New Request from earlier) */}
                             {activeProjectData.id === '01' && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                                  <img 
-  src="./assets/Unme_batch.jpg"
-  alt="Unme batch"
-  className="w-full h-full object-cover"
-/>
-                                    </div>
-                                    {/* New Image 2 */}
-                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[3/4] flex flex-col items-center justify-center text-gray-400">
-                                    <img 
-  src="./assets/3amigoss.jpg"
-  alt="Founders"
-  className="w-full h-full object-cover"
-/>
-                                    </div>
-                                </div>
-                            )}
+                               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
 
-                        </div>
-                        </div>
+    {/* New Image 1 */}
+    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[3/4] flex items-center justify-center">
+      <img 
+        src="./assets/Unme_batch.jpg"
+        alt="Unme batch"
+        className="w-full h-full object-cover"
+      />
+    </div>
+
+    {/* New Image 2 */}
+    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[3/4] flex items-center justify-center">
+      <img 
+        src="./assets/3amigoss.jpg"
+        alt="Founders"
+        className="w-full h-full object-cover"
+      />
+    </div>
+
+  </div>
                         
                         {/* Next Project Teaser */}
                         <div className="border-t-2 border-black pt-12 pb-20 flex justify-end">
