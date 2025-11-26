@@ -528,16 +528,22 @@
                             {/* ADDED: INSIGHTS HUB (02) Placeholders - Solution */}
                             {activeProjectData.id === '02' && (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                                    {/* Placeholder A */}
-                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[4/3] flex flex-col items-center justify-center text-gray-400">
-                                        <ImageIcon size={32} className="mb-2 opacity-50" />
-                                        <span className="font-mono text-xs uppercase tracking-widest">AI Flow Diagram</span>
-                                    </div>
-                                    {/* Placeholder B */}
-                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[4/3] flex flex-col items-center justify-center text-gray-400">
-                                        <ImageIcon size={32} className="mb-2 opacity-50" />
-                                        <span className="font-mono text-xs uppercase tracking-widest">Prompt Interface</span>
-                                    </div>
+                                  {/* Placeholder A — 11 Clicks Flow */}
+<div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 group relative">
+  <img 
+    src="./assets/11clicks.png"
+    alt="11 Clicks Flow"
+    className="w-full h-full object-cover"
+  />
+</div>
+                                    {/* Placeholder B – Create with AI */}
+<div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 group relative">
+  <img 
+    src="./assets/createwithai.png"
+    alt="Create with AI"
+    className="w-full h-full object-cover"
+  />
+</div>
                                 </div>
                             )}
 
