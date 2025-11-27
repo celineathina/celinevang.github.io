@@ -613,6 +613,31 @@
                                     <p className="text-xl leading-relaxed text-gray-300">
                                         {activeProjectData.content.outcome}
                                     </p>
+                                        {/* Final Two Images – Whiteboard + AI Chat */}
+{activeProjectData.id === '02' && (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 mb-12">
+
+    {/* Whiteboard */}
+    <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 group relative aspect-square flex items-center justify-center">
+        <img
+            src="./assets/whiteboard.jpg"
+            alt="Whiteboard Session"
+            className="w-full h-full object-cover"
+        />
+    </div>
+
+    {/* AI Chat */}
+    <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 group relative aspect-square flex items-center justify-center">
+        <img
+            src="./assets/aichat.png"
+            alt="AI Chat Interaction"
+            className="w-full h-full object-cover"
+        />
+    </div>
+
+  </div>
+)}
+
                                     </div>
                                 </div>
                             )}
