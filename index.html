@@ -537,22 +537,33 @@
                                {/* Landscape Image — replaced with real photo */}
 <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 mb-8 aspect-video">
   <img 
-    src="./assets/graph_layout_LP.png"
-    alt="Living Personas Graph Layout"
+    src="./assets/livingpersona.png"
+    alt="Living Personas prototype"
     className="w-full h-full object-cover"
   />
 </div>
-                                    {/* Two Bottom Images */}
-                                    <div className="grid grid-cols-2 gap-6">
-                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[4/3] flex flex-col items-center justify-center text-gray-400">
-                                        <ImageIcon size={32} className="mb-2 opacity-50" />
-                                        <span className="font-mono text-xs uppercase tracking-widest">Persona Card</span>
-                                    </div>
-                                    <div className="w-full h-auto bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group relative aspect-[4/3] flex flex-col items-center justify-center text-gray-400">
-                                        <ImageIcon size={32} className="mb-2 opacity-50" />
-                                        <span className="font-mono text-xs uppercase tracking-widest">Chat Interface</span>
-                                    </div>
-                                    </div>
+                                   {/* Two Bottom Images */}
+<div className="grid grid-cols-2 gap-6">
+
+  {/* Left Image — Dovetail */}
+  <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 aspect-[4/3]">
+    <img 
+      src="./assets/dovtail.png"
+      alt="Dovetail Data"
+      className="w-full h-full object-cover"
+    />
+  </div>
+
+  {/* Right Image — Transparency */}
+  <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 aspect-[4/3]">
+    <img 
+      src="./assets/transpansy.png"
+      alt="Transparency Layer"
+      className="w-full h-full object-cover"
+    />
+  </div>
+
+</div>
                                 </div>
                             )}
                             </div>
