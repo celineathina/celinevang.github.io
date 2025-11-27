@@ -174,11 +174,11 @@
 />
                     </div>
                     );
-                case '02': // INSIGHTS HUB
-                    return (
-                        <>
-                            
-                    {/* --- 1. 11 Clicks Image --- */}
+         case '02': // INSIGHTS HUB
+  return (
+    <>
+
+      {/* --- 1. 11 Clicks Image --- */}
       <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 mb-12">
         <img
           src="./assets/11clicks.png"
@@ -186,7 +186,49 @@
           className="w-full h-full object-cover"
         />
       </div>
-                    );
+
+      {/* --- 2. Create With AI Image --- */}
+      <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 mb-12">
+        <img
+          src="./assets/createwithai.png"
+          alt="Create with AI"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* --- 3. Feasibility Matrix --- */}
+      <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50 mb-12">
+        <img
+          src="./assets/Feasibilitymatrix.png"
+          alt="Feasibility Matrix"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* --- 4. Final Two Images --- */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+        <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+          <img
+            src="./assets/whiteboard.jpg"
+            alt="Whiteboard"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="w-full h-auto rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+          <img
+            src="./assets/aichat.png"
+            alt="AI Chat"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+      </div>
+
+    </>
+  );
+
                 case '03': // LIVING PERSONAS
                     return (
                     <div className="bg-[#FFF0F5] rounded-xl p-8 border border-rose-100 min-h-[400px] relative overflow-hidden flex flex-col items-center justify-center">
