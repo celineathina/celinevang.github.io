@@ -286,184 +286,227 @@
                 </nav>
 
                 {/* --- MAIN CONTENT SWITCHER --- */}
-                {!selectedProject ? (
-                    /* ================= HOME VIEW ================= */
-                    <main className="relative z-10">
-                    
-                    {/* Hero Section */}
-                    <header className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 pt-20">
-                        <div className="max-w-[90rem] mx-auto w-full">
-                        <div className="flex flex-col items-start relative">
-                            <h1 className="text-[10vw] md:text-[11vw] leading-[0.85] font-black tracking-tighter mb-8 text-black mix-blend-hard-light relative">
-                            <span className="flex items-center gap-4 md:gap-8">
-                                <ArrowRight className="w-[8vw] h-[8vw] stroke-[3px]" />
-                                SIMPLIFYING
-                            </span>
-                            <span className="block pl-[8vw] text-transparent bg-clip-text bg-gradient-to-r from-black via-black to-gray-600">
-                                COMPLEXITY
-                            </span>
-                            <span className="block pl-[2vw]">
-                                WITH AI & UX.
-                            </span>
-                            </h1>
-                        </div>
-                        
-                        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mt-12 border-t-2 border-black pt-8">
-                            <div className="max-w-2xl">
-                                <p className="text-2xl md:text-3xl font-medium leading-tight mb-6">
-                                Hi, I'm <span className="font-bold">Celine Vang</span>. 
-                                I build research-led, AI-supported products that make digital systems feel intuitive and human.
-                                </p>
-                            </div>
-                            <div className="mt-8 md:mt-0 font-mono text-sm tracking-widest uppercase">
-                                ( Copenhagen, DK )
-                            </div>
-                        </div>
-                        </div>
-                    </header>
+              {!selectedProject ? (
+  /* ================= HOME VIEW ================= */
+  <main className="relative z-10">
 
-                    {/* Projects List */}
-                    <section id="work" className="py-32 px-6 sm:px-12">
-                        <div className="flex items-center gap-4 mb-16">
-                        <div className="h-px bg-black flex-grow"></div>
-                        <h2 className="text-sm font-bold bg-black text-white px-3 py-1 uppercase rounded-sm">Selected Works</h2>
-                        </div>
-                        
-                        <div className="grid grid-cols-1 gap-4">
-                        {projects.map((project, index) => (
-                            <div 
-                            key={project.id}
-                            className="group relative bg-white/40 backdrop-blur-md border border-white/60 rounded-3xl p-8 md:p-12 transition-all duration-500 hover:bg-white/80 hover:scale-[1.01] hover:shadow-xl hover:shadow-rose-500/10 cursor-pointer overflow-hidden"
-                            onClick={() => {
-                                window.scrollTo(0,0);
-                                setSelectedProject(project.id);
-                            }}
-                            onMouseEnter={() => setActiveProjectHover(project.id)}
-                            onMouseLeave={() => setActiveProjectHover(null)}
-                            >
-                            <div className="flex flex-col md:flex-row justify-between relative z-20">
-                                <div className="flex-1">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <span className="flex items-center justify-center w-10 h-10 rounded-full border border-black font-mono text-sm group-hover:bg-black group-hover:text-white transition-colors">0{index + 1}</span>
-                                    <span className="font-mono text-xs uppercase tracking-widest bg-rose-100 px-2 py-1 rounded-md mix-blend-multiply">{project.category}</span>
-                                </div>
-                                
-                                <h3 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4 group-hover:text-rose-600 transition-colors">
-                                    {project.title}
-                                </h3>
-                                <p className="text-xl text-gray-800 max-w-lg font-medium leading-relaxed">
-                                    {project.desc}
-                                </p>
-                                </div>
+    {/* ================= HERO ================= */}
+    <header className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 pt-20">
+      <div className="max-w-[90rem] mx-auto w-full">
 
-                                <div className="mt-8 md:mt-0 md:text-right flex flex-col md:items-end justify-between">
-                                <div className="hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
-                                    <ArrowUpRight size={48} className="text-black" />
-                                </div>
-                                <div className="flex flex-col gap-1 font-mono text-xs">
-                                    <span className="text-gray-500 uppercase">Impact</span>
-                                    <span className="bg-black text-white px-2 py-1 rounded-sm">{project.impact}</span>
-                                </div>
-                                </div>
-                            </div>
+        <div className="flex flex-col items-start relative">
+          <h1 className="text-[10vw] md:text-[11vw] leading-[0.85] font-black tracking-tighter mb-8 text-black mix-blend-hard-light relative">
+            <span className="flex items-center gap-4 md:gap-8">
+              <ArrowRight className="w-[8vw] h-[8vw] stroke-[3px]" />
+              SIMPLIFYING
+            </span>
+            <span className="block pl-[8vw] text-transparent bg-clip-text bg-gradient-to-r from-black via-black to-gray-600">
+              COMPLEXITY
+            </span>
+            <span className="block pl-[2vw]">
+              WITH AI & UX.
+            </span>
+          </h1>
+        </div>
 
-                            <div className="absolute -bottom-10 -right-10 w-64 h-64 opacity-0 group-hover:opacity-10 transition-all duration-700 transform rotate-12 scale-50 group-hover:scale-100">
-                                {project.shape}
-                            </div>
-                            </div>
-                        ))}
-                        </div>
-                    </section>
-
-                   {/* About Section */}
-<section id="about" className="py-32 px-6 sm:px-12">
-  <div className="max-w-6xl mx-auto">
-      
-      {/* 1. Bio Text in Black Container (Full Width) */}
-      <div className="bg-black text-white p-8 md:p-12 rounded-[2rem] border border-gray-800 mb-16 relative overflow-hidden">
-          {/* Decorative Gradients inside the black box */}
-          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-rose-600 rounded-full mix-blend-screen filter blur-[80px] opacity-20"></div>
-          <div className="relative z-10">
-              <p className="text-2xl md:text-3xl font-bold mb-8 leading-relaxed">
-                  I’m Celine – a UX designer who moves comfortably between messy human behaviour and structured, data-heavy systems.
-              </p>
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                  Whether I’m building a startup like ÜNME, designing AI-powered tools at Maersk, or mapping complex workflows, my work always starts with one question:
-                  <br />
-                  <span className="text-white font-bold block mt-2">How do we make this feel clear, intuitive, and human?</span>
-              </p>
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                  I prototype fast, test early, and use AI as a creative partner.
-              </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                  Mostly, I’m driven by curiosity: how people think, how systems break, and how design can connect the two.
-              </p>
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mt-12 border-t-2 border-black pt-8">
+          <div className="max-w-2xl">
+            <p className="text-2xl md:text-3xl font-medium leading-tight mb-6">
+              Hi, I'm <span className="font-bold">Celine Vang</span>.  
+              I build research-led, AI-supported products that make digital systems feel intuitive and human.
+            </p>
           </div>
+
+          <div className="mt-8 md:mt-0 font-mono text-sm tracking-widest uppercase">
+            ( Copenhagen, DK )
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+
+    {/* ================= WORK / PROJECTS ================= */}
+    <section id="work" className="py-32 px-6 sm:px-12">
+
+      <div className="flex items-center gap-4 mb-16">
+        <div className="h-px bg-black flex-grow"></div>
+        <h2 className="text-sm font-bold bg-black text-white px-3 py-1 uppercase rounded-sm">
+          Selected Works
+        </h2>
       </div>
 
-      {/* 2. Grid for Portrait & Skills (Side by Side) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
-          
-          {/* Image Placeholder (Portrait) */}
-          <div className="w-full h-full min-h-[400px] aspect-[3/5] bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 relative group">
-              {/* Replace 'portraitImg' with your actual image variable or path */}
-              <img 
-                  src={portraitImg} 
-                  alt="Celine Vang" 
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                  }}
-              />
-              <div className="hidden absolute inset-0 flex-col items-center justify-center text-center p-4 text-gray-400" style={{display: 'flex'}}>
-                  <ImageIcon size={48} className="mb-4 opacity-50" />
-                  <span className="font-mono text-xs uppercase tracking-widest">Portrait Photo</span>
+      <div className="grid grid-cols-1 gap-4">
+        {projects.map((project, index) => (
+          <div 
+            key={project.id}
+            className="group relative bg-white/40 backdrop-blur-md border border-white/60 rounded-3xl p-8 md:p-12 transition-all duration-500 hover:bg-white/80 hover:scale-[1.01] hover:shadow-xl hover:shadow-rose-500/10 cursor-pointer overflow-hidden"
+            onClick={() => {
+              window.scrollTo(0, 0);
+              setSelectedProject(project.id);
+            }}
+            onMouseEnter={() => setActiveProjectHover(project.id)}
+            onMouseLeave={() => setActiveProjectHover(null)}
+          >
+            
+            <div className="flex flex-col md:flex-row justify-between relative z-20">
+
+              <div className="flex-1">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-full border border-black font-mono text-sm group-hover:bg-black group-hover:text-white transition-colors">
+                    0{index + 1}
+                  </span>
+
+                  <span className="font-mono text-xs uppercase tracking-widest bg-rose-100 px-2 py-1 rounded-md mix-blend-multiply">
+                    {project.category}
+                  </span>
+                </div>
+
+                <h3 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4 group-hover:text-rose-600 transition-colors">
+                  {project.title}
+                </h3>
+
+                <p className="text-xl text-gray-800 max-w-lg font-medium leading-relaxed">
+                  {project.desc}
+                </p>
               </div>
+
+              <div className="mt-8 md:mt-0 md:text-right flex flex-col md:items-end justify-between">
+                <div className="hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
+                  <ArrowUpRight size={48} className="text-black" />
+                </div>
+
+                <div className="flex flex-col gap-1 font-mono text-xs">
+                  <span className="text-gray-500 uppercase">Impact</span>
+                  <span className="bg-black text-white px-2 py-1 rounded-sm">{project.impact}</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Background Shape */}
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 opacity-0 group-hover:opacity-10 transition-all duration-700 transform rotate-12 scale-50 group-hover:scale-100">
+              {project.shape}
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+    </section>
+
+
+    {/* ================= ABOUT SECTION (your updated version) ================= */}
+    <section id="about" className="py-32 px-6 sm:px-12">
+      <div className="max-w-6xl mx-auto">
+
+        {/* BIO BOX */}
+        <div className="bg-black text-white p-8 md:p-12 rounded-[2rem] border border-gray-800 mb-16 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-rose-600 rounded-full mix-blend-screen filter blur-[80px] opacity-20"></div>
+          
+          <div className="relative z-10">
+            <p className="text-2xl md:text-3xl font-bold mb-8 leading-relaxed">
+              I’m Celine – a UX designer who moves comfortably between messy human behaviour and structured, data-heavy systems.
+            </p>
+
+            <p className="text-lg text-gray-300 leading-relaxed mb-6">
+              Whether I’m building a startup like ÜNME, designing AI-powered tools at Maersk, or mapping complex workflows, my work always starts with one question:
+              <span className="text-white font-bold block mt-2">
+                How do we make this feel clear, intuitive, and human?
+              </span>
+            </p>
+
+            <p className="text-lg text-gray-300 leading-relaxed mb-6">
+              I prototype fast, test early, and use AI as a creative partner.
+            </p>
+
+            <p className="text-lg text-gray-300 leading-relaxed">
+              Mostly, I’m driven by curiosity: how people think, how systems break, and how design can connect the two.
+            </p>
+          </div>
+        </div>
+
+
+        {/* PORTRAIT + SKILLS GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
+
+          {/* Portrait */}
+          <div className="w-full h-full min-h-[400px] aspect-[3/5] bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 relative group">
+            <img 
+              src={portraitImg}
+              alt="Celine Vang"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+            <div className="hidden absolute inset-0 flex-col items-center justify-center text-center p-4 text-gray-400" style={{display: 'flex'}}>
+              <ImageIcon size={48} className="mb-4 opacity-50" />
+              <span className="font-mono text-xs uppercase tracking-widest">Portrait Photo</span>
+            </div>
           </div>
 
-          {/* Skills List (Transparent/Glass Container) */}
+          {/* Skills */}
           <div className="bg-white/40 backdrop-blur-md p-8 rounded-2xl border border-white/60 h-full flex flex-col justify-center">
-              <h4 className="font-mono text-xs uppercase tracking-widest text-gray-500 mb-8 border-b border-gray-200 pb-4">Skills & Expertise</h4>
-              <ul className="space-y-4 font-medium text-lg">
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-rose-500 rounded-full"></div>AI Prototyping (Figma & Figma Make)</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>UX Prototyping</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>User Research</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>System Thinking</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-teal-500 rounded-full"></div>Storytelling</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>Workshop Facilitation</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div>Public Speaking</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>Illustrator & InDesign</li>
-              </ul>
+            <h4 className="font-mono text-xs uppercase tracking-widest text-gray-500 mb-8 border-b border-gray-200 pb-4">
+              Skills & Expertise
+            </h4>
+
+            <ul className="space-y-4 font-medium text-lg">
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-rose-500 rounded-full"></div>AI Prototyping (Figma & Figma Make)</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>UX Prototyping</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>User Research</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>System Thinking</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-teal-500 rounded-full"></div>Storytelling</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>Workshop Facilitation</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div>Public Speaking</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>Illustrator & InDesign</li>
+            </ul>
           </div>
+
+        </div>
 
       </div>
-  </div>
-</section>
+    </section>
 
-                    <footer id="contact" className="py-20 px-6 sm:px-12 text-center">
-                        <h2 className="text-[10vw] font-black tracking-tighter leading-none mb-8 hover:tracking-normal transition-all duration-700 cursor-default text-black">
-                        LET'S TALK
-                        </h2>
-                        <div className="flex justify-center gap-4 md:gap-8 flex-wrap mb-16">
-                        <a href="mailto:Celinevang.athina@gmail.com" className="bg-white border-2 border-black text-black px-8 py-4 rounded-full font-bold hover:bg-black hover:text-white transition-all transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none">
-                            EMAIL ME
-                        </a>
-                        <a href="#" className="bg-[#0077b5] border-2 border-black text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-all transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none">
-                            LINKEDIN
-                        </a>
-                        </div>
-                        <div className="flex flex-col md:flex-row justify-between items-center text-sm font-bold border-t-2 border-black pt-8">
-                        <div>© 2025 CELINE VANG</div>
-                        <div className="flex gap-2 items-center mt-4 md:mt-0">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            AVAILABLE FOR HIRE
-                        </div>
-                        </div>
-                    </footer>
-                    </main>
-                ) : (
-                    /* ================= PROJECT DETAIL VIEW ================= */
+
+    {/* ================= FOOTER ================= */}
+    <footer id="contact" className="py-20 px-6 sm:px-12 text-center">
+
+      <h2 className="text-[10vw] font-black tracking-tighter leading-none mb-8 hover:tracking-normal transition-all duration-700 cursor-default text-black">
+        LET'S TALK
+      </h2>
+
+      <div className="flex justify-center gap-4 md:gap-8 flex-wrap mb-16">
+        <a 
+          href="mailto:Celinevang.athina@gmail.com"
+          className="bg-white border-2 border-black text-black px-8 py-4 rounded-full font-bold hover:bg-black hover:text-white transition-all transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
+        >
+          EMAIL ME
+        </a>
+
+        <a 
+          href="#"
+          className="bg-[#0077b5] border-2 border-black text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-all transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
+        >
+          LINKEDIN
+        </a>
+      </div>
+
+      <div className="flex flex-col md:flex-row justify-between items-center text-sm font-bold border-t-2 border-black pt-8">
+        <div>© 2025 CELINE VANG</div>
+        <div className="flex gap-2 items-center mt-4 md:mt-0">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          AVAILABLE FOR HIRE
+        </div>
+      </div>
+
+    </footer>
+
+  </main>
+) : (
+      /* ================= PROJECT DETAIL VIEW ================= */
                     <div className="relative z-20 min-h-screen pt-24 px-6 sm:px-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
                     
                     {/* Back Button */}
